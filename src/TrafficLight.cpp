@@ -73,7 +73,6 @@ void TrafficLight::cycleThroughPhases()
           	_currentPhase = TrafficLightPhase::red;
         }
       
-      	// holder for now
-      	break;
+      	_queue.send(std::move(_currentPhase));
     }
 }
