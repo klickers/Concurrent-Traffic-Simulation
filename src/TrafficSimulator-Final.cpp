@@ -12,7 +12,8 @@
 void createTrafficObjects_Paris(std::vector<std::shared_ptr<Street>> &streets, std::vector<std::shared_ptr<Intersection>> &intersections, std::vector<std::shared_ptr<Vehicle>> &vehicles, std::string &filename, int nVehicles)
 {
     // assign filename of corresponding city map
-    filename = "../data/paris.jpg";
+    //filename = "../data/paris.jpg";
+  	filename = "/home/workspace/Concurrent-Traffic-Simulation/data/paris.jpg";
 
     // init traffic objects
     int nIntersections = 9;
@@ -54,7 +55,8 @@ void createTrafficObjects_Paris(std::vector<std::shared_ptr<Street>> &streets, s
 void createTrafficObjects_NYC(std::vector<std::shared_ptr<Street>> &streets, std::vector<std::shared_ptr<Intersection>> &intersections, std::vector<std::shared_ptr<Vehicle>> &vehicles, std::string &filename, int nVehicles)
 {
     // assign filename of corresponding city map
-    filename = "../data/nyc.jpg";
+    //filename = "../data/nyc.jpg";
+  	filename = "/home/workspace/Concurrent-Traffic-Simulation/data/nyc.jpg";
 
     // init traffic objects
     int nIntersections = 6;
