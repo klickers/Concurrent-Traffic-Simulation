@@ -34,10 +34,12 @@ class TrafficLight : public TrafficObject
 {
 public:
     // constructor / desctructor
-
+	TrafficLight();
+    ~TrafficLight();
+    
     // getters / setters
 
-	enum TrafficLightPhase { Red, Green };
+	enum TrafficLightPhase { red, green };
     TrafficLightPhase getCurrentPhase();
 
     // typical behaviour methods
