@@ -99,6 +99,7 @@ void TrafficLight::cycleThroughPhases()
           
           	timeStart = std::chrono::high_resolution_clock::now();
           	timeNow = std::chrono::high_resolution_clock::now();
+          	duration = range(eng);
 
             _queue.send(std::move(_currentPhase));
         }
