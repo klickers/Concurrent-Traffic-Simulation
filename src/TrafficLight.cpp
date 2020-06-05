@@ -70,26 +70,37 @@ void TrafficLight::cycleThroughPhases()
     // and toggles the current phase of the traffic light between red and green and sends an update method 
     // to the message queue using move semantics. The cycle duration should be a random value between 4 and 6 seconds. 
     // Also, the while-loop should use std::this_thread::sleep_for to wait 1ms between two cycles. 
+  	// generate a random time
+    std::default_random_engine eng(std::random_device{}());
+    std::uniform_int_distribution<int> range(4000, 6000);
+    int duration = range(eng);
+  
+  	std::chrono::high_resolution_clock::time_point timeStart = std::chrono::high_resolution_clock::now();
   
   	while (true) {
     	std::this_thread::sleep_for(std::chrono::milliseconds(1));
       
-      	// generate a random time
-      	std::default_random_engine eng;
-        std::uniform_int_distribution<int> range(4, 6);
-        int time = range(eng);
-      	// sleep for the random time
-      	std::this_thread::sleep_for(std::chrono::seconds(time));
+      	std::chrono::high_resolution_clock::time_point timeNow = std::chrono::high_resolution_clock::now();
       
-      	// switch phase
-      	if (_currentPhase == TrafficLightPhase::red)
+      	// sleep for the random duration
+      	auto timePassed = std::chrono::duration_cast<std::chrono::milliseconds>(timeNow - timeStart).count();
+      
+      	// check if enough time has passed
+      	if (timePassed >= duration)
         {
-          	_currentPhase = TrafficLightPhase::green;
+          	// switch phase
+            if (_currentPhase == TrafficLightPhase::red)
+            {
+                _currentPhase = TrafficLightPhase::green;
+            }
+            else {
+                _currentPhase = TrafficLightPhase::red;
+            }
+          
+          	timeStart = std::chrono::high_resolution_clock::now();
+          	timeNow = std::chrono::high_resolution_clock::now();
+
+            _queue.send(std::move(_currentPhase));
         }
-      	else {
-          	_currentPhase = TrafficLightPhase::red;
-        }
-      
-      	_queue.send(std::move(_currentPhase));
     }
 }
